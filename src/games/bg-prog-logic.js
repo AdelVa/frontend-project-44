@@ -6,6 +6,8 @@ import {
   checkMessage,
 } from '../index.js';
 
+const formatArr = (arr) => arr.join(' ');
+
 export const brainGameProg = () => {
   const userName = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${userName}!`);
@@ -15,13 +17,14 @@ export const brainGameProg = () => {
   while (i < 3 && gameError === false) {
     const firstEl = giveMeRand(20);
     const incr = giveMeRand(5);
-    const gameQuestion = [firstEl];
+    const gameArr = [firstEl];
     for (let j = 0; j < 9; j += 1) {
-      gameQuestion.push(gameQuestion[j] + incr);
+      gameArr.push(gameArr[j] + incr);
     }
     const randIndex = giveMeRand(10);
-    const gameAnswer = gameQuestion[randIndex];
-    gameQuestion[randIndex] = '..';
+    const gameAnswer = gameArr[randIndex];
+    gameArr[randIndex] = '..';
+    const gameQuestion = formatArr(gameArr);
     i += 1;
     console.log(`Question: ${gameQuestion}`);
     const userAnswer = readlineSync.question('Your answer: ');
