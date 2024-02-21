@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { brainGameEven } from '../src/games/bg-even-logic.js';
+import { brainGameProg } from '../src/games/bg-prog-logic.js';
 
 console.log('Welcome to the Brain Games!');
-brainGameEven();
+brainGameProg();
 process.exit(1);
