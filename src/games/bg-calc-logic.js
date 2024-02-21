@@ -6,6 +6,17 @@ import {
   checkMessage,
 } from '../index.js';
 
+const pickMeOp = (operRand, opOne, opTwo) => {
+  switch (operRand) {
+    case 1:
+      return [opOne - opTwo, `${opOne} - ${opTwo}`];
+    case 2:
+      return [opOne * opTwo, `${opOne} * ${opTwo}`];
+    default:
+      return [opOne + opTwo, `${opOne} + ${opTwo}`];
+  }
+};
+
 export const brainGameCalc = () => {
   const userName = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${userName}!`);
@@ -13,25 +24,11 @@ export const brainGameCalc = () => {
   let i = 0;
   let gameError = false;
   while (i < 3 && gameError === false) {
-    let gameAnswer = 0;
-    let gameQuestion = '';
     const operRand = giveMeRand(3);
     const opOne = giveMeRand(50);
     const opTwo = giveMeRand(50);
-    switch (operRand) {
-      case 1:
-        gameAnswer = opOne - opTwo;
-        gameQuestion = `${opOne} - ${opTwo}`;
-        break;
-      case 2:
-        gameAnswer = opOne * opTwo;
-        gameQuestion = `${opOne} * ${opTwo}`;
-        break;
-      default:
-        gameAnswer = opOne + opTwo;
-        gameQuestion = `${opOne} + ${opTwo}`;
-        break;
-    }
+    const gameArr = pickMeOp(operRand, opOne, opTwo);
+    const [gameAnswer, gameQuestion] = gameArr;
     i += 1;
     console.log(`Question: ${gameQuestion}`);
     const userAnswer = readlineSync.question('Your answer: ');
