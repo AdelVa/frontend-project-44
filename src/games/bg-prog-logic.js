@@ -21,7 +21,7 @@ export const brainGameProg = () => {
     for (let j = 0; j < 9; j += 1) {
       gameArr.push(gameArr[j] + incr);
     }
-    const randIndex = giveMeRand(10);
+    const randIndex = giveMeRand(9);
     const gameAnswer = gameArr[randIndex];
     gameArr[randIndex] = '..';
     const gameQuestion = formatArr(gameArr);
