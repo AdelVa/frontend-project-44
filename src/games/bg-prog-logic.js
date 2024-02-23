@@ -1,37 +1,25 @@
-import readlineSync from 'readline-sync/lib/readline-sync.js';
-import {
-  giveMeRand,
-  checkAnswer,
-  gameEndMessage,
-  checkMessage,
-} from '../index.js';
+import { giveMeRand, gameEngine } from '../index.js';
 
 const formatArr = (arr) => arr.join(' ');
 
-export const brainGameProg = () => {
-  const userName = readlineSync.question('May I have your name? ');
-  console.log(`Hello, ${userName}!`);
-  console.log('What number is missing in the progression?');
-  let i = 0;
-  let gameError = false;
-  while (i < 3 && gameError === false) {
-    const firstEl = giveMeRand(20);
-    const incr = giveMeRand(5);
-    const gameArr = [firstEl];
-    for (let j = 0; j < 9; j += 1) {
-      gameArr.push(gameArr[j] + incr);
-    }
-    const randIndex = giveMeRand(9);
-    const gameAnswer = gameArr[randIndex];
-    gameArr[randIndex] = '..';
-    const gameQuestion = formatArr(gameArr);
-    i += 1;
-    console.log(`Question: ${gameQuestion}`);
-    const userAnswer = readlineSync.question('Your answer: ');
-    gameError = checkAnswer(userAnswer, gameAnswer);
-    console.log(checkMessage(gameError, userAnswer, gameAnswer));
+const gameRule = 'What number is missing in the progression?';
+
+const gameValues = () => {
+  const firstEl = giveMeRand(20);
+  const incr = giveMeRand(5);
+  const gameArr = [firstEl];
+  for (let j = 0; j < 9; j += 1) {
+    gameArr.push(gameArr[j] + incr);
   }
-  return gameEndMessage(userName, gameError);
+  const randIndex = giveMeRand(9);
+  const gameAnswer = gameArr[randIndex];
+  gameArr[randIndex] = '..';
+  const gameQuestion = formatArr(gameArr);
+  return [gameQuestion, gameAnswer];
+};
+
+export const brainGameProg = () => {
+  gameEngine(gameRule, gameValues);
 };
 
 export default brainGameProg;
