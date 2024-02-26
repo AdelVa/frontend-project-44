@@ -1,16 +1,16 @@
-import readlineSync from 'readline-sync/lib/readline-sync.js';
+import readlineSync from 'readline-sync';
 
 const giveRandomNumber = (max) => Math.floor(Math.random() * max);
 
 const isCorrectAnswer = (userAnswer, gameAnswer) => userAnswer === gameAnswer;
 
-const playGame = (gameRule, gameValues) => {
+const playGame = (gameRule, getGameValues) => {
   console.log('Welcome to the Brain Games!');
   const userName = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${userName}!`);
   console.log(gameRule);
   for (let i = 0; i < 3; i += 1) {
-    const [gameQuestion, gameAnswer] = gameValues();
+    const [gameQuestion, gameAnswer] = getGameValues();
     console.log(`Question: ${gameQuestion}`);
     const userAnswer = readlineSync.question('Your answer: ');
     if (isCorrectAnswer(userAnswer, gameAnswer)) {
