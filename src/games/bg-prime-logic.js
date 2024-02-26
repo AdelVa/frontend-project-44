@@ -1,27 +1,28 @@
-import { giveMeRand, gameEngine } from '../index.js';
+import { giveRandomNumber, playGame } from '../index.js';
 
-const checkPrime = (num) => {
+const isPrime = (num) => {
   if (num < 2) {
-    return 'no';
+    return false;
   }
   for (let i = 2; i < num; i += 1) {
     if (num % i === 0) {
-      return 'no';
+      return false;
     }
   }
-  return 'yes';
+  return true;
 };
 
 const gameRule = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
-const gameValues = () => {
-  const gameQuestion = giveMeRand(1000);
-  const gameAnswer = checkPrime(gameQuestion);
+const getGameValues = () => {
+  const randomGameMax = 1000;
+  const gameQuestion = giveRandomNumber(randomGameMax);
+  const gameAnswer = isPrime(gameQuestion) === false ? 'no' : 'yes';
   return [gameQuestion, gameAnswer];
 };
 
-export const brainGamePrime = () => {
-  gameEngine(gameRule, gameValues);
+export const playBrainPrime = () => {
+  playGame(gameRule, getGameValues);
 };
 
-export default brainGamePrime;
+export default playBrainPrime;

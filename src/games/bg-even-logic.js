@@ -1,15 +1,16 @@
-import { giveMeRand, gameEngine } from '../index.js';
+import { giveRandomNumber, playGame } from '../index.js';
 
 const gameRule = 'Answer "yes" if the number is even, otherwise answer "no".';
 
-const gameValues = () => {
-  const gameQuestion = giveMeRand(1000);
+const getGameValues = () => {
+  const randomGameMax = 1000;
+  const gameQuestion = giveRandomNumber(randomGameMax);
   const gameAnswer = gameQuestion % 2 === 0 ? 'yes' : 'no';
   return [gameQuestion, gameAnswer];
 };
 
-export const brainGameEven = () => {
-  gameEngine(gameRule, gameValues);
+export const playBrainEven = () => {
+  playGame(gameRule, getGameValues);
 };
 
-export default brainGameEven;
+export default playBrainEven;

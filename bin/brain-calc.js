@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { brainGameCalc } from '../src/games/bg-calc-logic.js';
+import { playBrainCalc } from '../src/games/bg-calc-logic.js';
 
-console.log('Welcome to the Brain Games!');
-brainGameCalc();
-process.exit(1);
+playBrainCalc();

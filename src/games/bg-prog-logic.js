@@ -1,25 +1,32 @@
-import { giveMeRand, gameEngine } from '../index.js';
+import { giveRandomNumber, playGame } from '../index.js';
 
-const formatArr = (arr) => arr.join(' ');
+const formatProgression = (arr) => arr.join(' ');
 
 const gameRule = 'What number is missing in the progression?';
 
-const gameValues = () => {
-  const firstEl = giveMeRand(20);
-  const incr = giveMeRand(5);
-  const gameArr = [firstEl];
+const getProgression = (gameArray) => {
+  const randomIncrMax = 5;
+  const incr = giveRandomNumber(randomIncrMax);
   for (let j = 0; j < 9; j += 1) {
-    gameArr.push(gameArr[j] + incr);
+    gameArray.push(gameArray[j] + incr);
   }
-  const randIndex = giveMeRand(9);
-  const gameAnswer = gameArr[randIndex];
-  gameArr[randIndex] = '..';
-  const gameQuestion = formatArr(gameArr);
+  return gameArray;
+};
+
+const getGameValues = () => {
+  const randomGameMax = 20;
+  const firstElement = giveRandomNumber(randomGameMax);
+  const gameArray = [firstElement];
+  const gameProgression = getProgression(gameArray);
+  const hiddenIndex = giveRandomNumber(gameProgression.length);
+  const gameAnswer = String(gameProgression[hiddenIndex]);
+  gameProgression[hiddenIndex] = '..';
+  const gameQuestion = formatProgression(gameProgression);
   return [gameQuestion, gameAnswer];
 };
 
-export const brainGameProg = () => {
-  gameEngine(gameRule, gameValues);
+export const playBrainProg = () => {
+  playGame(gameRule, getGameValues);
 };
 
-export default brainGameProg;
+export default playBrainProg;

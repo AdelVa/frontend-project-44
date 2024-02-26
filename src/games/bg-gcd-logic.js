@@ -1,27 +1,28 @@
-import { giveMeRand, gameEngine } from '../index.js';
+import { giveRandomNumber, playGame } from '../index.js';
 
-const GCD = (opOne, opTwo) => {
-  if (opTwo > opOne) {
-    return GCD(opTwo, opOne);
+const getGcd = (operandOne, operandTwo) => {
+  if (operandTwo > operandOne) {
+    return getGcd(operandTwo, operandOne);
   }
-  if (!opTwo) {
-    return opOne;
+  if (!operandTwo) {
+    return operandOne;
   }
-  return GCD(opTwo, opOne % opTwo);
+  return getGcd(operandTwo, operandOne % operandTwo);
 };
 
 const gameRule = 'Find the greatest common divisor of given numbers.';
 
-const gameValues = () => {
-  const opOne = giveMeRand(50);
-  const opTwo = giveMeRand(50);
-  const gameAnswer = GCD(opOne, opTwo);
-  const gameQuestion = `${opOne} ${opTwo}`;
+const getGameValues = () => {
+  const randomGameMax = 50;
+  const operandOne = giveRandomNumber(randomGameMax);
+  const operandTwo = giveRandomNumber(randomGameMax);
+  const gameAnswer = String(getGcd(operandOne, operandTwo));
+  const gameQuestion = `${operandOne} ${operandTwo}`;
   return [gameQuestion, gameAnswer];
 };
 
-export const brainGameGCD = () => {
-  gameEngine(gameRule, gameValues);
+export const playBrainGCD = () => {
+  playGame(gameRule, getGameValues);
 };
 
-export default brainGameGCD;
+export default playBrainGCD;
