@@ -5,8 +5,11 @@ const formatProgression = (arr) => arr.join(' ');
 const gameRule = 'What number is missing in the progression?';
 
 const getProgression = (gameArray) => {
+  const randomIncrMin = 1;
   const randomIncrMax = 5;
-  const incr = giveRandomNumber(randomIncrMax);
+  const incr = Math.floor(
+    Math.random() * (randomIncrMax - randomIncrMin) + randomIncrMin,
+  );
   for (let j = 0; j < 9; j += 1) {
     gameArray.push(gameArray[j] + incr);
   }
